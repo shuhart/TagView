@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tagview_tag_id" type="id" />
+    <item name="tagview_view_background" type="id"/>
+    <item name="tagview_view_foreground" type="id"/>
+    <item name="tagview_textview_drawable_left" type="id"/>
+    <item name="tagview_textview_drawable_top" type="id"/>
+    <item name="tagview_textview_drawable_right" type="id"/>
+    <item name="tagview_textview_drawable_bottom" type="id"/>
+    <item name="tagview_imageview_src" type="id"/>
+</resources>
