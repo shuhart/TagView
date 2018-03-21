@@ -1,5 +1,5 @@
 # TagView
-Assert a view resources in your UI tests in easy way.
+Compare view resources in easy way, especially in yor Espresso tests.
 
 An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps `bitmap.sameAs()` or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
 
