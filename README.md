@@ -51,18 +51,13 @@ If you create a widget in runtime not using the xml inflation then you can use [
 
 ```java
 setBackground(View view, int id)
-setBackgroundTag(View view, int id)
 clearBackground(View view)
 setForeground(View view, int id)
-setForegroundTag(View view, int id)
 clearForeground(View view)
 setTextViewCompoundDrawablesRelativeWithIntrinsicBounds(TextView view, int left, int top, int right, int bottom)
 setTextViewCompoundDrawables(TextView view, int left, int top, int right, int bottom)
-setDrawableLeftTag(TextView view, int drawable)
-setDrawableTopTag(TextView view, int drawable)
-setDrawableRightTag(TextView view, int drawable)
-setDrawableBottomTag(TextView view, int drawable)
 setImageViewResource(ImageView view, int id)
+setTag(View view, int key, int id)
 ```
 
 ### Supported tags
