@@ -1,7 +1,7 @@
 # TagView
 Assert a view resources in your UI tests in easy way.
 
-An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps ```bitmap.sameAs()``` or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
+An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps `bitmap.sameAs()` or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
 
 Approach here based on using a custom inflater. Pretty much the same as [Calligraphy](https://github.com/chrisjenx/Calligraphy) does. Some predefined tags are set to the inflated by the custom [LayoutInflater](https://developer.android.com/reference/android/view/LayoutInflater.html) views.
 
