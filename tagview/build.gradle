@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/shuhart/TagView'
     gitUrl = 'https://github.com/shuhart/TagView.git'
 
-    libraryVersion = '0.1'
+    libraryVersion = '0.2'
 
     developerId = 'shuhart'
     developerName = 'Redrick Shuhart'
