@@ -95,7 +95,7 @@ TagViewConfig.initDefault(new TagViewConfig.Builder()
 onView(withId(R.id.met_edittext)).check(assertTagKeyValue(R.id.met_icon_left, android.R.drawable.ic_secure));
 ```
 
-Any tag key for a view must be defined as id in xml. This is a documents requirement. See [android.view.View#setTag(int, Object)](https://developer.android.com/reference/android/view/View.html#setTag(int,%20java.lang.Object))
+Any tag key for a view must be defined as id in xml. This is Android SDK requirement. See [android.view.View#setTag(int, Object)](https://developer.android.com/reference/android/view/View.html#setTag(int,%20java.lang.Object))
 
 
 ### No reflection way
