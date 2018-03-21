@@ -34,7 +34,7 @@ public class TagViewUtils {
         }
     }
 
-    public static int getTag(View view, int key) {
+    public static int getTag(View view, @IdRes int key) {
         Object tag = view.getTag(key);
         if (tag != null && tag instanceof Integer) {
             return ((int) tag);
