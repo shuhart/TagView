@@ -1,9 +1,9 @@
 # TagView
 Assert a view resources in your UI tests in easy way.
 
-An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps (bitmap.sameAs()) or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
+An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps ```bitmap.sameAs()``` or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
 
-Approach here based on using a custom inflater. Pretty much the same as [Calligraphy](https://github.com/chrisjenx/Calligraphy) does. Some corresponding tags are set to the inflated by the [LayoutInflater](https://developer.android.com/reference/android/view/LayoutInflater.html) views.
+Approach here based on using a custom inflater. Pretty much the same as [Calligraphy](https://github.com/chrisjenx/Calligraphy) does. Some predefined tags are set to the inflated by the custom [LayoutInflater](https://developer.android.com/reference/android/view/LayoutInflater.html) views.
 
 ## Getting started
 
@@ -44,7 +44,7 @@ onView(withId(R.id.imageview)).check(assertTagKeyValue(ViewTag.IMAGEVIEW_SRC.id,
 
 You can find usage example in [ExampleInstrumentedTest](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ExampleInstrumentedTest.java)
 
-A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ViewTagMatchers.java) are available.
+A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ViewTagMatchers.java) are used.
 
 ### Tagging in runtime
 If you create a widget in runtime not using the xml inflation then you can use [TagViewUtils](../TagView/blob/master/tagview/src/main/java/com/shuhart/tagview/TagViewUtils.java) when you want to set a TextView drawable or else:
