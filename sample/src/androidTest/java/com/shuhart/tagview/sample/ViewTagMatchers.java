@@ -1,8 +1,12 @@
 package com.shuhart.tagview.sample;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.AnyRes;
+import android.support.annotation.IdRes;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.ViewAssertion;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.view.View;
 
 import com.shuhart.tagview.TagViewUtils;
@@ -25,7 +29,7 @@ public class ViewTagMatchers {
         private final int key;
         private final int expectedResId;
 
-        private WithTagKeyValueMatcher(int key, @AnyRes int expectedResId) {
+        private WithTagKeyValueMatcher(@IdRes int key, @AnyRes int expectedResId) {
             this.key = key;
             this.expectedResId = expectedResId;
         }
@@ -33,14 +37,23 @@ public class ViewTagMatchers {
         @Override
         public void describeTo(Description description) {
             Context context = InstrumentationRegistry.getTargetContext();
-            description.appendText("with key: " + TagViewUtils.getResourceName(context, key));
-            description.appendText(", with resource id: " + TagViewUtils.getResourceName(context, expectedResId));
+            Resources resources = context.getResources();
+            description.appendText("with key: " + getResourceName(resources, key));
+            description.appendText(", with resource id: " + getResourceName(resources, expectedResId));
+        }
+
+        private String getResourceName(Resources resources, int id) {
+            return resources.getResourceTypeName(id) + "/" + resources.getResourceEntryName(id);
         }
 
         @Override
         public boolean matchesSafely(View view) {
             Object tag = view.getTag(key);
-            return (tag != null && tag instanceof String && tag.equals(TagViewUtils.getTag(view, key)));
+            return (tag != null && tag instanceof Integer && tag.equals(TagViewUtils.getTag(view, key)));
         }
+    }
+
+    public static ViewAssertion assertTagKeyValue(final int key, @AnyRes int expectedResId) {
+        return ViewAssertions.matches(withTagKeyValue(key, expectedResId));
     }
 }

@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.AnyRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
@@ -34,39 +34,30 @@ public class TagViewUtils {
         }
     }
 
+    public static int getTag(View view, int key) {
+        Object tag = view.getTag(key);
+        if (tag != null && tag instanceof Integer) {
+            return ((int) tag);
+        }
+        return ViewTagStubs.EMPTY_RESOURCE;
+    }
+
+    public static void setTag(View view, @IdRes int key, String tag) {
+        view.setTag(key, tag);
+    }
+
+    public static void setTag(View view, @IdRes int key, @AnyRes int id) {
+        view.setTag(key, id);
+    }
+
     public static void setBackground(View view, @DrawableRes int id) {
         view.setBackgroundResource(id);
-        setBackgroundTag(view, id);
-    }
-
-    public static void setBackgroundTag(View view, @DrawableRes int id) {
-        view.setTag(R.id.tagview_view_background, getResourceName(view.getContext(), id));
-    }
-
-    public static String getResourceName(Context context, @AnyRes int id) {
-        if (id == 0) {
-            return ViewTagStubs.INVALID_TAG;
-        }
-        Resources resources = context.getResources();
-        return resources.getResourceTypeName(id) + "/" + resources.getResourceEntryName(id);
-    }
-
-    public static String getTag(View view, int key) {
-        Object tag = view.getTag(key);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTagStubs.INVALID_TAG;
-    }
-
-    public static boolean compareResourceTags(View view, int key, @AnyRes int expectedResId) {
-        String tag = getTag(view, key);
-        return tag.equals(getResourceName(view.getContext(), expectedResId));
+        setTag(view, ViewTag.VIEW_BACKGROUND.id, id);
     }
 
     public static void clearBackground(View view) {
         view.setBackground(null);
-        view.setTag(R.id.tagview_view_background, ViewTagStubs.INVALID_TAG);
+        view.setTag(ViewTag.VIEW_BACKGROUND.id, ViewTagStubs.EMPTY_RESOURCE);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -74,12 +65,8 @@ public class TagViewUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M || view instanceof FrameLayout) {
             Context context = view.getContext();
             view.setForeground(getDrawable(context, id));
-            setForegroundTag(view, id);
+            setTag(view, ViewTag.VIEW_FOREGROUND.id, id);
         }
-    }
-
-    public static void setForegroundTag(View view, @DrawableRes int id) {
-        view.setTag(R.id.tagview_view_foreground, getResourceName(view.getContext(), id));
     }
 
     @Nullable
@@ -91,7 +78,7 @@ public class TagViewUtils {
     @TargetApi(Build.VERSION_CODES.M)
     public static void clearForeground(View view) {
         view.setForeground(null);
-        view.setTag(R.id.tagview_view_foreground, ViewTagStubs.INVALID_TAG);
+        view.setTag(ViewTag.VIEW_FOREGROUND.id, ViewTagStubs.EMPTY_RESOURCE);
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -101,26 +88,10 @@ public class TagViewUtils {
                                                                                @DrawableRes int right,
                                                                                @DrawableRes int bottom) {
         view.setCompoundDrawablesRelativeWithIntrinsicBounds(left, top, right, bottom);
-        setDrawableLeftTag(view, left);
-        setDrawableTopTag(view, top);
-        setDrawableRightTag(view, right);
-        setDrawableBottomTag(view, bottom);
-    }
-
-    public static void setDrawableLeftTag(@NonNull TextView view, @DrawableRes int drawable) {
-        view.setTag(R.id.tagview_textview_drawable_left, getResourceName(view.getContext(), drawable));
-    }
-
-    public static void setDrawableTopTag(@NonNull TextView view, @DrawableRes int drawable) {
-        view.setTag(R.id.tagview_textview_drawable_top, getResourceName(view.getContext(), drawable));
-    }
-
-    public static void setDrawableRightTag(@NonNull TextView view, @DrawableRes int drawable) {
-        view.setTag(R.id.tagview_textview_drawable_right, getResourceName(view.getContext(), drawable));
-    }
-
-    public static void setDrawableBottomTag(@NonNull TextView view, @DrawableRes int drawable) {
-        view.setTag(R.id.tagview_textview_drawable_bottom, getResourceName(view.getContext(), drawable));
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_LEFT.id, left);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_TOP.id, top);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id, right);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_BOTTOM.id, bottom);
     }
 
     public static void setTextViewCompoundDrawables(TextView view,
@@ -133,23 +104,19 @@ public class TagViewUtils {
                 getDrawable(context, top),
                 getDrawable(context, right),
                 getDrawable(context, bottom));
-        setDrawableLeftTag(view, left);
-        setDrawableTopTag(view, top);
-        setDrawableRightTag(view, right);
-        setDrawableBottomTag(view, bottom);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_LEFT.id, left);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_TOP.id, top);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id, right);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_BOTTOM.id, bottom);
     }
 
     public static void setImageViewResource(ImageView view, @DrawableRes int id) {
         view.setBackgroundResource(id);
-        setImageViewResourceTag(view, id);
-    }
-
-    public static void setImageViewResourceTag(ImageView view, @DrawableRes int id) {
-        view.setTag(R.id.tagview_imageview_src, getResourceName(view.getContext(), id));
+        setTag(view, ViewTag.IMAGEVIEW_SRC.id, id);
     }
 
     public static void clearImageViewResource(ImageView view) {
         view.setImageDrawable(null);
-        view.setTag(R.id.tagview_imageview_src, ViewTagStubs.INVALID_TAG);
+        view.setTag(ViewTag.IMAGEVIEW_SRC.id, ViewTagStubs.EMPTY_RESOURCE);
     }
 }

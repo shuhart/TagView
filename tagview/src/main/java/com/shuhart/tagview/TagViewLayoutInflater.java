@@ -93,7 +93,7 @@ class TagViewLayoutInflater extends LayoutInflater implements TagViewActivityFac
         // Already tried to set the factory.
         if (setPrivateFactory) return;
         // Reflection (Or Old Device) skip.
-        if (!TagViewConfig.get().isReflection()) return;
+        if (!TagViewConfig.get().reflection) return;
         // Skip if not attached to an activity.
         if (!(getContext() instanceof Factory2)) {
             setPrivateFactory = true;
@@ -178,7 +178,7 @@ class TagViewLayoutInflater extends LayoutInflater implements TagViewActivityFac
         // significant difference to performance on Android 4.0+.
 
         // If CustomViewCreation is off skip this.
-        if (!TagViewConfig.get().isCustomViewCreation()) return view;
+        if (!TagViewConfig.get().customViewCreation) return view;
         if (view == null && name.indexOf('.') > -1) {
             if (constructorArgs == null)
                 constructorArgs = ReflectionUtils.getField(LayoutInflater.class, "mConstructorArgs");

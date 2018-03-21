@@ -2,21 +2,13 @@ package com.shuhart.tagview;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.AttrRes;
+import android.support.annotation.IdRes;
 import android.util.AttributeSet;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TagViewConfig {
 
@@ -45,23 +37,21 @@ public class TagViewConfig {
     /**
      * Use Reflection to inject the private factory.
      */
-    private final boolean mReflection;
+    public final boolean reflection;
     /**
      * Use Reflection to intercept CustomView inflation with the correct Context.
      */
-    private final boolean mCustomViewCreation;
+    public final boolean customViewCreation;
+    /**
+     * Custom attributes to look for when a view is inflated.
+     * Use it in case predefined attributes are not enough.
+     */
+    public final SparseIntArray customViewTags;
 
     protected TagViewConfig(Builder builder) {
-        mReflection = builder.reflection;
-        mCustomViewCreation = builder.customViewCreation;
-    }
-
-    public boolean isReflection() {
-        return mReflection;
-    }
-
-    public boolean isCustomViewCreation() {
-        return mCustomViewCreation;
+        reflection = builder.reflection;
+        customViewCreation = builder.customViewCreation;
+        customViewTags = builder.customViewTags;
     }
 
     public static class Builder {
@@ -73,7 +63,11 @@ public class TagViewConfig {
          * Use Reflection to inject the private factory. Doesn't exist pre HC. so defaults to false.
          */
         private boolean reflection = true;
-
+        /**
+         * Custom attributes to look for when a view is inflated.
+         * Use it in case predefined attributes are not enough.
+         */
+        private SparseIntArray customViewTags = new SparseIntArray();
         /**
          * <p>Turn of the use of Reflection to inject the private factory.
          * This has operational consequences! Please read and understand before disabling.
@@ -125,8 +119,21 @@ public class TagViewConfig {
             return this;
         }
 
+        /**
+         * Set a custom attribute to lookup in an inflated view.
+         * You can use it for your custom views or any other android widgets.
+         *
+         * @param attr to search for in an inflated view
+         * @param key to be used for tag in view. Value for a tag is a resource id.
+         */
+        public Builder addAttributeTag(@AttrRes int attr, @IdRes Integer key) {
+            this.customViewTags.append(attr, key);
+            return this;
+        }
+
         public TagViewConfig build() {
             return new TagViewConfig(this);
         }
+
     }
 }
