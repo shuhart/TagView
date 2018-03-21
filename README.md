@@ -1,16 +1,16 @@
 # TagView
 Assert a view resources in your UI tests in easy way.
 
-An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps (bitmap.sameAs()) or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
+An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps `bitmap.sameAs()` or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
 
-Approach here based on using a custom inflater. Pretty much the same as [Calligraphy](https://github.com/chrisjenx/Calligraphy) does. Some corresponding tags are set to the inflated by the [LayoutInflater](https://developer.android.com/reference/android/view/LayoutInflater.html) views.
+Approach here based on using a custom inflater. Pretty much the same as [Calligraphy](https://github.com/chrisjenx/Calligraphy) does. Some predefined tags are set to the inflated by the custom [LayoutInflater](https://developer.android.com/reference/android/view/LayoutInflater.html) views.
 
 ## Getting started
 
 ### Dependency
 
 1. Add jcenter() to repositories block in your gradle file.
-2. Add `implementation 'com.shuhart.tagview:tagview:0.2'` to your dependencies.
+2. Add `implementation 'com.shuhart.tagview:tagview:1.0'` to your dependencies.
 
 ### Usage
 
@@ -44,38 +44,38 @@ onView(withId(R.id.imageview)).check(assertTagKeyValue(ViewTag.IMAGEVIEW_SRC.id,
 
 You can find usage example in [ExampleInstrumentedTest](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ExampleInstrumentedTest.java)
 
-A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ViewTagMatchers.java) are available.
+A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ViewTagMatchers.java) are used.
 
 ### Tagging in runtime
 If you create a widget in runtime not using the xml inflation then you can use [TagViewUtils](../TagView/blob/master/tagview/src/main/java/com/shuhart/tagview/TagViewUtils.java) when you want to set a TextView drawable or else:
 
 ```java
 setBackground(View view, int id)
-setBackgroundTag(View view, int id)
 clearBackground(View view)
 setForeground(View view, int id)
-setForegroundTag(View view, int id)
 clearForeground(View view)
 setTextViewCompoundDrawablesRelativeWithIntrinsicBounds(TextView view, int left, int top, int right, int bottom)
 setTextViewCompoundDrawables(TextView view, int left, int top, int right, int bottom)
-setDrawableLeftTag(TextView view, int drawable)
-setDrawableTopTag(TextView view, int drawable)
-setDrawableRightTag(TextView view, int drawable)
-setDrawableBottomTag(TextView view, int drawable)
 setImageViewResource(ImageView view, int id)
+setTag(View view, int key, int id)
 ```
 
-### Supported tags
+### Predefined tags
 
-| Tag key (R.id) | Description | Usage |
+| Tag key (R.id) | Description |
 |-----------------------|-----------------------|
-| tagview_view_background | ```android:backgrond``` | TagViewUtils.getTag(view, ViewTag.VIEW_BACKGROUND.id) |
-| tagview_view_foreground | ```android:foreground``` | TagViewUtils.getTag(view, ViewTag.VIEW_FOREGROUND.id) |
-| tagview_textview_drawable_left | TextView ```android:drawableLeft or andorid:drawableStart``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_LEFT.id) |
-| tagview_textview_drawable_top | TextView ```android:drawableTop``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_TOP.id) |
-| tagview_textview_drawable_right | TextView ```android:drawableRight or android:drawableEnd``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id) |
-| tagview_textview_drawable_bottom | TextView ```android:drawableBottom``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id) |
-| tagview_imageview_src | ImageView ```android:src``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id) |
+| tagview_view_background | ```android:backgrond``` |
+| tagview_view_foreground | ```android:foreground``` |
+| tagview_textview_drawable_left | TextView ```android:drawableLeft or andorid:drawableStart``` |
+| tagview_textview_drawable_top | TextView ```android:drawableTop``` |
+| tagview_textview_drawable_right | TextView ```android:drawableRight or android:drawableEnd``` |
+| tagview_textview_drawable_bottom | TextView ```android:drawableBottom``` |
+| tagview_imageview_src | ImageView ```android:src``` |
+
+You can retrieve any tag by calling `TagViewUtils.getTag(View view, @IdRes int key)`:
+```java
+TagViewUtils.getTag(view, ViewTag.VIEW_BACKGROUND.id)
+```
 
 
 ### Custom attributes
@@ -95,7 +95,7 @@ TagViewConfig.initDefault(new TagViewConfig.Builder()
 onView(withId(R.id.met_edittext)).check(assertTagKeyValue(R.id.met_icon_left, android.R.drawable.ic_secure));
 ```
 
-Any tag key for a view must be defined as id in xml. This is a documents requirement. See [android.view.View#setTag(int, Object)](https://developer.android.com/reference/android/view/View.html#setTag(int,%20java.lang.Object))
+Any tag key for a view must be defined as id in xml. This is Android SDK requirement. See android.view.View#[setTag(int, Object)](https://developer.android.com/reference/android/view/View.html#setTag(int,%20java.lang.Object))
 
 
 ### No reflection way
