@@ -2,6 +2,7 @@ package com.shuhart.tagview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -20,14 +21,14 @@ import android.widget.TextView;
 public class TagViewUtils {
 
     static int pullAttr(final Context context, @Nullable AttributeSet attrs, int[] attrId) {
-        if (attrs == null) return ViewTags.EMPTY_RESOURCE;
+        if (attrs == null) return ViewTagStubs.EMPTY_RESOURCE;
         final TypedArray ta = context.obtainStyledAttributes(attrs, attrId);
-        if (ta == null) return ViewTags.EMPTY_RESOURCE;
+        if (ta == null) return ViewTagStubs.EMPTY_RESOURCE;
         try {
-            return ta.getResourceId(0, ViewTags.EMPTY_RESOURCE);
+            return ta.getResourceId(0, ViewTagStubs.EMPTY_RESOURCE);
         } catch (Exception ignored) {
             // Failed for some reason
-            return ViewTags.EMPTY_RESOURCE;
+            return ViewTagStubs.EMPTY_RESOURCE;
         } finally {
             ta.recycle();
         }
@@ -44,22 +45,28 @@ public class TagViewUtils {
 
     public static String getResourceName(Context context, @AnyRes int id) {
         if (id == 0) {
-            return ViewTags.INVALID_TAG;
+            return ViewTagStubs.INVALID_TAG;
         }
-        return context.getResources().getResourceName(id);
+        Resources resources = context.getResources();
+        return resources.getResourceTypeName(id) + "/" + resources.getResourceEntryName(id);
     }
 
-    public static String getBackgroundTag(View view) {
-        Object tag = view.getTag(R.id.tagview_view_background);
+    public static String getTag(View view, int key) {
+        Object tag = view.getTag(key);
         if (tag != null && tag instanceof String) {
             return ((String) tag);
         }
-        return ViewTags.INVALID_TAG;
+        return ViewTagStubs.INVALID_TAG;
+    }
+
+    public static boolean compareResourceTags(View view, int key, @AnyRes int expectedResId) {
+        String tag = getTag(view, key);
+        return tag.equals(getResourceName(view.getContext(), expectedResId));
     }
 
     public static void clearBackground(View view) {
         view.setBackground(null);
-        view.setTag(R.id.tagview_view_background, ViewTags.INVALID_TAG);
+        view.setTag(R.id.tagview_view_background, ViewTagStubs.INVALID_TAG);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -81,18 +88,10 @@ public class TagViewUtils {
         return ContextCompat.getDrawable(context, id);
     }
 
-    public static String getForegroundTag(View view) {
-        Object tag = view.getTag(R.id.tagview_view_foreground);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTags.INVALID_TAG;
-    }
-
     @TargetApi(Build.VERSION_CODES.M)
     public static void clearForeground(View view) {
         view.setForeground(null);
-        view.setTag(R.id.tagview_view_foreground, ViewTags.INVALID_TAG);
+        view.setTag(R.id.tagview_view_foreground, ViewTagStubs.INVALID_TAG);
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -124,38 +123,6 @@ public class TagViewUtils {
         view.setTag(R.id.tagview_textview_drawable_bottom, getResourceName(view.getContext(), drawable));
     }
 
-    public static String getTextViewDrawableLeftTag(TextView view) {
-        Object tag = view.getTag(R.id.tagview_textview_drawable_left);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTags.INVALID_TAG;
-    }
-
-    public static String getTextViewDrawableTopTag(TextView view) {
-        Object tag = view.getTag(R.id.tagview_textview_drawable_top);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTags.INVALID_TAG;
-    }
-
-    public static String getTextViewDrawableRightTag(TextView view) {
-        Object tag = view.getTag(R.id.tagview_textview_drawable_right);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTags.INVALID_TAG;
-    }
-
-    public static String getTextViewDrawableBottomTag(TextView view) {
-        Object tag = view.getTag(R.id.tagview_textview_drawable_bottom);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTags.INVALID_TAG;
-    }
-
     public static void setTextViewCompoundDrawables(TextView view,
                                                     @DrawableRes int left,
                                                     @DrawableRes int top,
@@ -181,16 +148,8 @@ public class TagViewUtils {
         view.setTag(R.id.tagview_imageview_src, getResourceName(view.getContext(), id));
     }
 
-    public static String getImageViewResourceTag(ImageView view) {
-        Object tag = view.getTag(R.id.tagview_imageview_src);
-        if (tag != null && tag instanceof String) {
-            return ((String) tag);
-        }
-        return ViewTags.INVALID_TAG;
-    }
-
     public static void clearImageViewResource(ImageView view) {
         view.setImageDrawable(null);
-        view.setTag(R.id.tagview_imageview_src, ViewTags.INVALID_TAG);
+        view.setTag(R.id.tagview_imageview_src, ViewTagStubs.INVALID_TAG);
     }
 }

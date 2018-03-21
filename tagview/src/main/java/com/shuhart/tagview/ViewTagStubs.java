@@ -1,6 +1,6 @@
 package com.shuhart.tagview;
 
-interface ViewTags {
+public interface ViewTagStubs {
     String INVALID_TAG = "";
     int EMPTY_RESOURCE = 0;
 }

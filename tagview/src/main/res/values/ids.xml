@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- helper id -->
     <item name="tagview_tag_id" type="id" />
+    <!-- any view background resource name tag -->
     <item name="tagview_view_background" type="id"/>
+    <!-- any view (from API 23) or FrameLayout foreground resource name tag -->
     <item name="tagview_view_foreground" type="id"/>
+    <!-- TextView drawable left resource name tag -->
     <item name="tagview_textview_drawable_left" type="id"/>
+    <!-- TextView drawable top resource name tag -->
     <item name="tagview_textview_drawable_top" type="id"/>
+    <!-- TextView drawable right resource name tag -->
     <item name="tagview_textview_drawable_right" type="id"/>
+    <!-- TextView drawable bottom resource name tag -->
     <item name="tagview_textview_drawable_bottom" type="id"/>
+    <!-- ImageView src resource name tag -->
     <item name="tagview_imageview_src" type="id"/>
 </resources>

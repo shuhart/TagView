@@ -3,23 +3,21 @@ package com.shuhart.tagview.sample;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewAssertion;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.shuhart.tagview.TagViewUtils;
+import com.shuhart.tagview.ViewTag;
+import com.shuhart.tagview.ViewTagStubs;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
+import static com.shuhart.tagview.sample.ViewTagMatchers.withTagKeyValue;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -35,52 +33,20 @@ public class ExampleInstrumentedTest {
     @Test
     public void test() {
         final Context context = InstrumentationRegistry.getTargetContext();
-        onView(withId(R.id.textview)).check(new ViewAssertion() {
-            @Override
-            public void check(View view, NoMatchingViewException noViewFoundException) {
-                if (noViewFoundException == null) {
-                    TextView textView = (TextView) view;
-                    Assert.assertEquals(
-                            TagViewUtils.getResourceName(context, android.R.drawable.ic_delete),
-                            TagViewUtils.getTextViewDrawableLeftTag(textView));
-                    Assert.assertEquals(
-                            TagViewUtils.getResourceName(context, android.R.drawable.ic_btn_speak_now),
-                            TagViewUtils.getTextViewDrawableTopTag(textView));
-                    Assert.assertEquals(
-                            TagViewUtils.getResourceName(context, android.R.drawable.ic_input_add),
-                            TagViewUtils.getTextViewDrawableRightTag(textView));
-                    Assert.assertEquals(
-                            TagViewUtils.getResourceName(context, android.R.drawable.ic_input_get),
-                            TagViewUtils.getTextViewDrawableBottomTag(textView));
-                }
-            }
-        });
-        onView(withId(R.id.frame)).check(new ViewAssertion() {
-            @Override
-            public void check(View view, NoMatchingViewException noViewFoundException) {
-                if (noViewFoundException == null) {
-                    Assert.assertEquals(
-                            TagViewUtils.getResourceName(context, R.color.colorPrimary),
-                            TagViewUtils.getBackgroundTag(view));
-                    int id = getSelectableItemBackgroundId(context);
-                    if (id != 0) {
-                        Assert.assertEquals(
-                                TagViewUtils.getResourceName(context, id),
-                                TagViewUtils.getForegroundTag(view));
-                    }
-                }
-            }
-        });
-        onView(withId(R.id.imageview)).check(new ViewAssertion() {
-            @Override
-            public void check(View view, NoMatchingViewException noViewFoundException) {
-                if (noViewFoundException == null) {
-                    Assert.assertEquals(
-                            TagViewUtils.getResourceName(context, android.R.drawable.ic_media_play),
-                            TagViewUtils.getImageViewResourceTag((ImageView) view));
-                }
-            }
-        });
+        onView(withId(R.id.textview)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.TEXTVIEW_DRAWABLE_LEFT.id, android.R.drawable.ic_delete)));
+        onView(withId(R.id.textview)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.TEXTVIEW_DRAWABLE_TOP.id, android.R.drawable.ic_btn_speak_now)));
+        onView(withId(R.id.textview)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id, android.R.drawable.ic_input_add)));
+        onView(withId(R.id.textview)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.TEXTVIEW_DRAWABLE_BOTTOM.id, android.R.drawable.ic_input_get)));
+        onView(withId(R.id.frame)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.VIEW_BACKGROUND.id, R.color.colorPrimary)));
+        onView(withId(R.id.frame)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.VIEW_FOREGROUND.id, getSelectableItemBackgroundId(context))));
+        onView(withId(R.id.imageview)).check(ViewAssertions.matches(
+                withTagKeyValue(ViewTag.IMAGEVIEW_SRC.id, android.R.drawable.ic_media_play)));
     }
 
     private int getSelectableItemBackgroundId(Context context) {

@@ -19,11 +19,11 @@ class TagViewFactory {
 
     void onViewCreatedInternal(View view, final Context context, AttributeSet attrs) {
         int backgroundId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_BACKGROUND);
-        if (backgroundId != ViewTags.EMPTY_RESOURCE) {
+        if (backgroundId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setBackgroundTag(view, backgroundId);
         }
         int foregroundId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_FOREGROUND);
-        if (foregroundId != ViewTags.EMPTY_RESOURCE) {
+        if (foregroundId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setForegroundTag(view, foregroundId);
         }
         if (view instanceof TextView) {
@@ -35,36 +35,36 @@ class TagViewFactory {
 
     private void onTextViewCreated(TextView view, Context context, AttributeSet attrs) {
         int drawableLeftId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_DRAWABLE_LEFT);
-        if (drawableLeftId != ViewTags.EMPTY_RESOURCE) {
+        if (drawableLeftId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setDrawableLeftTag(view, drawableLeftId);
         } else {
             drawableLeftId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_DRAWABLE_START);
-            if (drawableLeftId != ViewTags.EMPTY_RESOURCE) {
+            if (drawableLeftId != ViewTagStubs.EMPTY_RESOURCE) {
                 TagViewUtils.setDrawableLeftTag(view, drawableLeftId);
             }
         }
         int drawableTopId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_DRAWABLE_TOP);
-        if (drawableTopId != ViewTags.EMPTY_RESOURCE) {
+        if (drawableTopId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setDrawableTopTag(view, drawableTopId);
         }
         int drawableRightId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_DRAWABLE_RIGHT);
-        if (drawableRightId != ViewTags.EMPTY_RESOURCE) {
+        if (drawableRightId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setDrawableRightTag(view, drawableRightId);
         } else {
             drawableRightId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_DRAWABLE_END);
-            if (drawableRightId != ViewTags.EMPTY_RESOURCE) {
+            if (drawableRightId != ViewTagStubs.EMPTY_RESOURCE) {
                 TagViewUtils.setDrawableLeftTag(view, drawableRightId);
             }
         }
         int drawableBottomId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_DRAWABLE_BOTTOM);
-        if (drawableBottomId != ViewTags.EMPTY_RESOURCE) {
+        if (drawableBottomId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setDrawableBottomTag(view, drawableBottomId);
         }
     }
 
     private void onImageViewCreated(ImageView view, Context context, AttributeSet attrs) {
         int srcId = TagViewUtils.pullAttr(context, attrs, Attrs.ANDROID_ATTR_SRC);
-        if (srcId != ViewTags.EMPTY_RESOURCE) {
+        if (srcId != ViewTagStubs.EMPTY_RESOURCE) {
             TagViewUtils.setImageViewResourceTag(view, srcId);
         }
     }
