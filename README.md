@@ -60,17 +60,22 @@ setImageViewResource(ImageView view, int id)
 setTag(View view, int key, int id)
 ```
 
-### Supported tags
+### Predefined tags
 
-| Tag key (R.id) | Description | Usage |
+| Tag key (R.id) | Description |
 |-----------------------|-----------------------|
-| tagview_view_background | ```android:backgrond``` | TagViewUtils.getTag(view, ViewTag.VIEW_BACKGROUND.id) |
-| tagview_view_foreground | ```android:foreground``` | TagViewUtils.getTag(view, ViewTag.VIEW_FOREGROUND.id) |
-| tagview_textview_drawable_left | TextView ```android:drawableLeft or andorid:drawableStart``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_LEFT.id) |
-| tagview_textview_drawable_top | TextView ```android:drawableTop``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_TOP.id) |
-| tagview_textview_drawable_right | TextView ```android:drawableRight or android:drawableEnd``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id) |
-| tagview_textview_drawable_bottom | TextView ```android:drawableBottom``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id) |
-| tagview_imageview_src | ImageView ```android:src``` | TagViewUtils.getTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id) |
+| tagview_view_background | ```android:backgrond``` |
+| tagview_view_foreground | ```android:foreground``` |
+| tagview_textview_drawable_left | TextView ```android:drawableLeft or andorid:drawableStart``` |
+| tagview_textview_drawable_top | TextView ```android:drawableTop``` |
+| tagview_textview_drawable_right | TextView ```android:drawableRight or android:drawableEnd``` |
+| tagview_textview_drawable_bottom | TextView ```android:drawableBottom``` |
+| tagview_imageview_src | ImageView ```android:src``` |
+
+You can retrieve any tag by calling `TagViewUtils.getTag(View view, @IdRes int key)`:
+```java
+TagViewUtils.getTag(view, ViewTag.VIEW_BACKGROUND.id)
+```
 
 
 ### Custom attributes
