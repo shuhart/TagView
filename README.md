@@ -42,7 +42,7 @@ onView(withId(R.id.frame)).check(assertTagKeyValue(ViewTag.VIEW_FOREGROUND.id, g
 onView(withId(R.id.imageview)).check(assertTagKeyValue(ViewTag.IMAGEVIEW_SRC.id, android.R.drawable.ic_media_play));
 ```
 
-You can find usage example in [ExampleInstrumentedTest](../master/tagview/src/androidTest/java/com/shuhart/tagview/ExampleInstrumentedTest.java)
+You can find usage example in [ExampleInstrumentedTest](../master/sample/src/androidTest/java/com/shuhart/tagview/ExampleInstrumentedTest.java)
 
 A convenient espresso matcher and assertion [ViewTagMatchers](../master/sample/src/androidTest/java/com/shuhart/tagview/sample/ViewTagMatchers.java) are used.
 
