@@ -44,7 +44,7 @@ onView(withId(R.id.imageview)).check(assertTagKeyValue(ViewTag.IMAGEVIEW_SRC.id,
 
 You can find usage example in [ExampleInstrumentedTest](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ExampleInstrumentedTest.java)
 
-A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ViewTagMatchers.java) are used.
+A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/sample/src/androidTest/java/com/shuhart/tagview/sample/ViewTagMatchers.java) are used.
 
 ### Tagging in runtime
 If you create a widget in runtime not using the xml inflation then you can use [TagViewUtils](../TagView/blob/master/tagview/src/main/java/com/shuhart/tagview/TagViewUtils.java) when you want to set a TextView drawable or else:
