@@ -63,7 +63,7 @@ setTag(View view, int key, int id)
 In this case tagging is done for you internally. If you use Kotlin you can write a handy extensions to call view itself. Something like this:
 
 ```kotlin
-fun ImageView.setImageResourceWithTag(@DrawableRes int id) {
+fun ImageView.setImageResourceWithTag(@param:DrawableRes int id) {
     TagViewUtils.setImageViewResource(this, id)
 }
 ```
