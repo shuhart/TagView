@@ -1,5 +1,5 @@
 # TagView
-Assert a view resources in your UI tests in easy way.
+Compare view resources in easy way by just their ids, especially handy in yor Espresso tests.
 
 An android widget like TextView usually do not hold a reference to the drawable resources you set to them. It can be a trouble if you want to assert that view displays correct drawables. You can do that in several ways: compare raw bitmaps `bitmap.sameAs()` or set a custom tag with resource id to retrieve it later in your tests. This library can help you to automate the second approach.   
 
@@ -42,12 +42,12 @@ onView(withId(R.id.frame)).check(assertTagKeyValue(ViewTag.VIEW_FOREGROUND.id, g
 onView(withId(R.id.imageview)).check(assertTagKeyValue(ViewTag.IMAGEVIEW_SRC.id, android.R.drawable.ic_media_play));
 ```
 
-You can find usage example in [ExampleInstrumentedTest](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ExampleInstrumentedTest.java)
+You can find usage example in [ExampleInstrumentedTest](../master/sample/src/androidTest/java/com/shuhart/tagview/sample/ExampleInstrumentedTest.java)
 
-A convenient espresso matcher and assertion [ViewTagMatchers](../blob/master/tagview/src/androidTest/java/com/shuhart/tagview/ViewTagMatchers.java) are used.
+A convenient espresso matcher and assertion [ViewTagMatchers](../master/sample/src/androidTest/java/com/shuhart/tagview/sample/ViewTagMatchers.java) are used.
 
 ### Tagging in runtime
-If you create a widget in runtime not using the xml inflation then you can use [TagViewUtils](../TagView/blob/master/tagview/src/main/java/com/shuhart/tagview/TagViewUtils.java) when you want to set a TextView drawable or else:
+If you create a widget in runtime not using the xml inflation then you can use [TagViewUtils](../master/tagview/src/main/java/com/shuhart/tagview/TagViewUtils.java) when you want to set a TextView drawable or else:
 
 ```java
 setBackground(View view, int id)
@@ -58,6 +58,14 @@ setTextViewCompoundDrawablesRelativeWithIntrinsicBounds(TextView view, int left,
 setTextViewCompoundDrawables(TextView view, int left, int top, int right, int bottom)
 setImageViewResource(ImageView view, int id)
 setTag(View view, int key, int id)
+```
+
+In this case tagging is done for you internally. If you use Kotlin you can write a handy extensions to call view itself. Something like this:
+
+```kotlin
+fun ImageView.setImageResourceWithTag(@param:DrawableRes int id) {
+    TagViewUtils.setImageViewResource(this, id)
+}
 ```
 
 ### Predefined tags

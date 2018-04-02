@@ -21,7 +21,7 @@ public class ViewTagMatchers {
      *
      * @param key to match
      */
-    public static Matcher<View> withTagKeyValue(final int key, final @AnyRes int expectedResId) {
+    public static Matcher<View> withTagKeyValue(final @IdRes int key, final @AnyRes int expectedResId) {
         return new WithTagKeyValueMatcher(key, expectedResId);
     }
 
@@ -53,7 +53,7 @@ public class ViewTagMatchers {
         }
     }
 
-    public static ViewAssertion assertTagKeyValue(final int key, @AnyRes int expectedResId) {
+    public static ViewAssertion assertTagKeyValue(final @IdRes int key, @AnyRes int expectedResId) {
         return ViewAssertions.matches(withTagKeyValue(key, expectedResId));
     }
 }
