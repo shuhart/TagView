@@ -20,7 +20,8 @@ import java.lang.reflect.Method;
 class TagViewLayoutInflater extends LayoutInflater implements TagViewActivityFactory {
 
     private static final String[] classPrefixList = {
-            "android.widget."
+            "android.widget.",
+            "android.webkit."
     };
 
     private final TagViewFactory tagViewFactory;
