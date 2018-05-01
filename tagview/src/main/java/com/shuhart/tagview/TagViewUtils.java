@@ -94,6 +94,18 @@ public class TagViewUtils {
         setTag(view, ViewTag.TEXTVIEW_DRAWABLE_BOTTOM.id, bottom);
     }
 
+    public static void setTextViewCompoundDrawablesWithIntrinsicBounds(TextView view,
+                                                                               @DrawableRes int left,
+                                                                               @DrawableRes int top,
+                                                                               @DrawableRes int right,
+                                                                               @DrawableRes int bottom) {
+        view.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_LEFT.id, left);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_TOP.id, top);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_RIGHT.id, right);
+        setTag(view, ViewTag.TEXTVIEW_DRAWABLE_BOTTOM.id, bottom);
+    }
+
     public static void setTextViewCompoundDrawables(TextView view,
                                                     @DrawableRes int left,
                                                     @DrawableRes int top,
