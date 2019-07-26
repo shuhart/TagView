@@ -10,7 +10,7 @@ Approach here based on using a custom inflater. Pretty much the same as [Calligr
 ### Dependency
 
 1. Add jcenter() to repositories block in your gradle file.
-2. Add `implementation 'com.shuhart.tagview:tagview:1.0.2'` to your dependencies.
+2. Add `implementation 'com.shuhart.tagview:tagview:1.0.3'` to your dependencies.
 
 ### Usage
 
