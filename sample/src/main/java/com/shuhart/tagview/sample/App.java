@@ -9,7 +9,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         TagViewConfig.initDefault(new TagViewConfig.Builder()
-                .addAttributeTag(com.rengwuxian.materialedittext.R.attr.met_iconRight, R.id.met_icon_right)
+//                .addAttributeTag(com.rengwuxian.materialedittext.R.attr.met_iconRight, R.id.met_icon_right)
                 .build());
     }
 }

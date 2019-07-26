@@ -2,13 +2,13 @@ package com.shuhart.tagview;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.AttrRes;
-import android.support.annotation.IdRes;
 import android.util.AttributeSet;
-import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.IdRes;
 
 public class TagViewConfig {
 

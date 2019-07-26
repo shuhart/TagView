@@ -1,6 +1,7 @@
 package com.shuhart.tagview;
 
-import android.support.annotation.IdRes;
+
+import androidx.annotation.IdRes;
 
 public class CustomTag {
     public CustomTag(@IdRes int key, String tag) {

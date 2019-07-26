@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,9 +13,7 @@
         android:layout_height="wrap_content"
         android:drawableBottom="@android:drawable/ic_input_get"
         android:drawableEnd="@android:drawable/ic_input_add"
-        android:drawableLeft="@android:drawable/ic_delete"
         android:drawablePadding="16dp"
-        android:drawableRight="@android:drawable/ic_input_add"
         android:drawableStart="@android:drawable/ic_delete"
         android:drawableTop="@android:drawable/ic_btn_speak_now"
         android:gravity="center_vertical"
@@ -37,12 +34,9 @@
         android:background="@color/colorPrimary"
         android:foreground="?selectableItemBackground" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/met_edittext"
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:met_iconRight="@android:drawable/ic_secure" />
+        android:layout_height="wrap_content" />
 
     <WebView
 

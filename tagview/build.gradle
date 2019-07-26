@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/shuhart/TagView'
     gitUrl = 'https://github.com/shuhart/TagView.git'
 
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     developerId = 'shuhart'
     developerName = 'Redrick Shuhart'
@@ -37,11 +37,11 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -59,7 +59,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
 }
 
 

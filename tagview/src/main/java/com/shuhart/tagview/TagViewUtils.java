@@ -2,21 +2,21 @@ package com.shuhart.tagview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.AnyRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.AnyRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 public class TagViewUtils {
 
@@ -36,7 +36,7 @@ public class TagViewUtils {
 
     public static int getTag(View view, @IdRes int key) {
         Object tag = view.getTag(key);
-        if (tag != null && tag instanceof Integer) {
+        if (tag instanceof Integer) {
             return ((int) tag);
         }
         return ViewTagStubs.EMPTY_RESOURCE;
@@ -95,10 +95,10 @@ public class TagViewUtils {
     }
 
     public static void setTextViewCompoundDrawablesWithIntrinsicBounds(TextView view,
-                                                                               @DrawableRes int left,
-                                                                               @DrawableRes int top,
-                                                                               @DrawableRes int right,
-                                                                               @DrawableRes int bottom) {
+                                                                       @DrawableRes int left,
+                                                                       @DrawableRes int top,
+                                                                       @DrawableRes int right,
+                                                                       @DrawableRes int bottom) {
         view.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
         setTag(view, ViewTag.TEXTVIEW_DRAWABLE_LEFT.id, left);
         setTag(view, ViewTag.TEXTVIEW_DRAWABLE_TOP.id, top);
@@ -123,7 +123,7 @@ public class TagViewUtils {
     }
 
     public static void setImageViewResource(ImageView view, @DrawableRes int id) {
-        view.setBackgroundResource(id);
+        view.setImageResource(id);
         setTag(view, ViewTag.IMAGEVIEW_SRC.id, id);
     }
 
